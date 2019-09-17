@@ -3,23 +3,23 @@ import axios from 'axios';
 
 const Movie = (props) => {
   const [movie, setMovie] = useState({});
- 
+
   useEffect(() => {
-    const id = 1;
+    const id = movie.id;
     // change ^^^ that line and grab the id from the URL
     // You will NEED to add a dependency array to this effect hook
 
-       axios
-        .get(`http://localhost:5000/api/movies/${id}`)
-        .then(response => {
-          setMovie(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+    axios
+      .get(`http://localhost:5000/api/movies/${id}`)
+      .then(response => {
+        setMovie(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
-  },[]);
-  
+  }, [movie.id]);
+
   // Uncomment this only when you have moved on to the stretch goals
   // const saveMovie = () => {
   //   const addToSavedList = props.addToSavedList;
@@ -31,6 +31,7 @@ const Movie = (props) => {
   }
 
   const { title, director, metascore, stars } = movie;
+  console.log(movie);
   return (
     <div className="save-wrapper">
       <div className="movie-card">
